@@ -1,25 +1,20 @@
 const html = document.querySelector('html');
-
-
 const focoBt = document.querySelector('.app__card-button--foco');
 const curtoBt = document.querySelector('.app__card-button--curto');
 const longoBt = document.querySelector('.app__card-button--longo');
 const temporizador = document.querySelector('#timer');
 const imagens = document.querySelector('.app__image');
 const titulo = document.querySelector('.app__title');
-const botaoIniciar = document.querySelector('.app__card-primary-button');
-const tempFoco = 1500;
-const tempCurto = 300;
-const tempLongo = 900;
 const botoes = document.querySelectorAll('.app__card-button');
 const startPauseBt = document.querySelector('#start-pause');
 const musicaFocoInput = document.querySelector('#alternar-musica');
 const iniciarPausarBt = document.querySelector('#start-pause span');
+const imgPlay = document.querySelector('.app__card-primary-button-icon');
+
 const musica = new Audio('sons/luna-rise-part-one.mp3');
-const audioPlay = new Audio('sons/beep.mp3');
+const audioPlay = new Audio('sons/play.wav');
 const audioPause = new Audio('sons/pause.mp3');
-const audioTempoFinalizado = new Audio('sons/play.wav');
-const imgPlay = document.querySelector('.app__card-primary-butto-icon');
+const audioTempoFinalizado = new Audio('sons/beep.wav');
 
 let tempoDecorridoEmSegundos = 1500;
 
@@ -87,14 +82,15 @@ const contagemRegressiva = () => {
     if (tempoDecorridoEmSegundos <= 0) {
         audioTempoFinalizado.play();
         alert('Tempo finalizado!');
-        zerar();        
+        zerar();
+        return;
     }
     tempoDecorridoEmSegundos -= 1; //decrementando em 1 em 1;
     mostrarTempo();
     
 }
 
-startPauseBt.addEventListener = ('click', iniciarPausar); // quando for clicado, irá chamar a função iniciar.
+startPauseBt.addEventListener ('click', iniciarPausar); // quando for clicado, irá chamar a função iniciar.
 
 function iniciarPausar (){
     if (intervaloId) {
