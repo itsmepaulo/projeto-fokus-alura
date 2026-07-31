@@ -15,5 +15,5 @@ formAdicionarTarefa.addEventListener('submit', (evento) => {
         descricao: textarea.value
     }
     tarefas.push(tarefa); // Adiciona o objeto tarefa para o array tarefas.
-    localStorage.setItem('tarefas', tarefas);
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));  // Convertendo o array para uma string em formato JSON para poder armazenar.
 })
