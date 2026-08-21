@@ -7,7 +7,9 @@ const ulTarefas = document.querySelector('.app__section-task-list');
 
 const tarefas = JSON.parse(localStorage.getItem('tarefas')) || []; //Lista de tarefas, por isso criado um array
 
-
+function atualizarTarefas() {
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));// Convertendo o array para uma string em formato JSON para poder armazenar.
+}
 
 function criarElementoTarefa(tarefa) {
     const li = document.createElement('li');
@@ -28,9 +30,16 @@ function criarElementoTarefa(tarefa) {
     const botao = document.createElement('button');
     botao.classList.add('app_button-edit');
 
-    botao.onclick = () =>{
-        const novaDescricao = prompt('Defina o novo nome da tarefa.')
-        paragrafo.textContent = novaDescricao; // O parágrafo irá receber o valor do novaDescricao
+    botao.onclick = () => {
+        const novaDescricao = prompt('Defina o novo nome da tarefa.');
+        if (novaDescricao == '') {
+            alert('Erro: Insira uma tarefa válida.')
+        } else {
+            paragrafo.textContent = novaDescricao; // O parágrafo irá receber o valor do novaDescricao
+            tarefa.descricao = novaDescricao;
+            atualizarTarefas();
+        }
+
     }
 
 
@@ -55,7 +64,7 @@ formAdicionarTarefa.addEventListener('submit', (evento) => {
     tarefas.push(tarefa); // Adiciona o objeto tarefa para o array tarefas.
     const elementoTarefa = criarElementoTarefa(tarefa);
     ulTarefas.append(elementoTarefa);
-    localStorage.setItem('tarefas', JSON.stringify(tarefas));  // Convertendo o array para uma string em formato JSON para poder armazenar.
+    atualizarTarefas();
     textarea.value = '';
     formAdicionarTarefa.classList.add('hidden');
 })
