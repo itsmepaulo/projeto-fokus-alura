@@ -3,7 +3,8 @@ const adicionarTarefaBt = document.querySelector('.app__button--add-task');
 const formAdicionarTarefa = document.querySelector('.app__form-add-task');
 const textarea = document.querySelector('.app__form-textarea');
 const ulTarefas = document.querySelector('.app__section-task-list');
-
+const btnCancelar = document.querySelector('.app__form-footer__button--cancel');
+ 
 
 const tarefas = JSON.parse(localStorage.getItem('tarefas')) || []; //Lista de tarefas, por isso criado um array
 
@@ -31,6 +32,7 @@ function criarElementoTarefa(tarefa) {
     botao.classList.add('app_button-edit');
 
     botao.onclick = () => {
+        debugger //testa o código.
         const novaDescricao = prompt('Defina o novo nome da tarefa.');
         if (novaDescricao == '') {
             alert('Erro: Insira uma tarefa válida.')
@@ -73,3 +75,12 @@ tarefas.forEach(tarefa => {
     const elementoTarefa = criarElementoTarefa(tarefa);
     ulTarefas.append(elementoTarefa);
 })
+
+// Crie uma função para limpar o conteúdo do textarea e esconder o formulário
+const limparFormulario = () => {
+    textarea.value = '';  // Limpe o conteúdo do textarea
+    formularioTarefa.classList.add('hidden');  // Adicione a classe 'hidden' ao formulário para escondê-lo
+}
+ 
+// Associe a função limparFormulario ao evento de clique do botão Cancelar
+btnCancelar.addEventListener('click', limparFormulario);
