@@ -4,7 +4,9 @@ const formAdicionarTarefa = document.querySelector('.app__form-add-task');
 const textarea = document.querySelector('.app__form-textarea');
 const ulTarefas = document.querySelector('.app__section-task-list');
 const btnCancelar = document.querySelector('.app__form-footer__button--cancel');
- 
+const paragrafoDescricaoTarefa = document.querySelector('.app__section-active-task-description');
+
+
 
 const tarefas = JSON.parse(localStorage.getItem('tarefas')) || []; //Lista de tarefas, por isso criado um array
 
@@ -32,7 +34,7 @@ function criarElementoTarefa(tarefa) {
     botao.classList.add('app_button-edit');
 
     botao.onclick = () => {
-        debugger //testa o código.
+        // debugger //testa o código.
         const novaDescricao = prompt('Defina o novo nome da tarefa.');
         if (novaDescricao == '') {
             alert('Erro: Insira uma tarefa válida.')
@@ -50,7 +52,11 @@ function criarElementoTarefa(tarefa) {
     botao.append(imagemBotao);
 
     li.append(svg, paragrafo, botao);
-
+    li.onclick = () =>{
+        paragrafoDescricaoTarefa.textContent = tarefa.descricao;
+        document.querySelectorAll
+        li.classList.add('app__section-task-list-item-active')
+    }
     return li
 }
 
